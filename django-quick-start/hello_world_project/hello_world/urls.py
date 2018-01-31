@@ -19,5 +19,6 @@ from hello_world import views
 urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^about/', views.about, name='about'),
-    url(r'^weather/', views.weather, name='weather')
+    url(r'^weather/', views.weather, name='weather'),
+    url(r'^better/', views.better, name='better'),
 ]
