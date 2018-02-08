@@ -49,7 +49,11 @@ def add_post(request):
         form = PostForm(request.POST, request.FILES)
         if form.is_valid(): # is the form valid?
             form.save(commit=True) # yes? save to database
-            return redirect(index)
+            post = Post.objects.all().order_by('-created_at')[0]
+            post.url = encode_url(post.title)
+            t = loader.get_template('blog/post.html')
+            c = Context({'single_post': post, })
+            return HttpResponse(t.render(c))
         else:
             print(form.errors)# no? display errors to end user
     else:
