@@ -33,9 +33,8 @@ def index(request):
     return HttpResponse(t.render(c))
 
 
-def post(request, post_url):
-    single_post = get_object_or_404(Post,
-    title=post_url.replace('_', ' '))
+def post(request, slug):
+    single_post = get_object_or_404(Post, slug=slug)
     single_post.views += 1  # increment the number of views
     single_post.save()      # and save it
     t = loader.get_template('blog/post.html')
@@ -50,9 +49,8 @@ def add_post(request):
         if form.is_valid(): # is the form valid?
             form.save(commit=True) # yes? save to database
             post = Post.objects.all().order_by('-created_at')[0]
-            post.url = encode_url(post.title)
             t = loader.get_template('blog/post.html')
-            c = Context({'single_post': post, })
+            c = Context({'single_post': post.slug, })
             return HttpResponse(t.render(c))
         else:
             print(form.errors)# no? display errors to end user
