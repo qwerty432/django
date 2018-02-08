@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='post',
             name='slug',
-            field=models.CharField(default=datetime.date(2018, 2, 8), unique=True, max_length=100),
+            field=models.CharField(default='test', max_length=100),
             preserve_default=False,
         ),
     ]
