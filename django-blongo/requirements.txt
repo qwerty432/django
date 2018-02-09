@@ -1,0 +1,2 @@
+mongoengine==0.8.8
+pymongo==2.7.2
